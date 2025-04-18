@@ -1,0 +1,23 @@
+# netlify.toml
+
+[build]
+  # Comando para construir tu app Angular (incluyendo SSR)
+  command = "ng build"
+  # Carpeta con los archivos estáticos del navegador (VERIFICA ESTA RUTA)
+  publish = "dist/casa-laureles/browser"
+  # Carpeta con la función del servidor (VERIFICA ESTA RUTA)
+  functions = "dist/casa-laureles/server"
+
+# Redirige todas las peticiones a la función SSR de Netlify
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server" # 'server' debe coincidir con el nombre de tu archivo server.ts
+  status = 200
+
+# Necesario para que Angular maneje rutas que no son archivos estáticos
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  # Condición para que no aplique a archivos existentes (opcional pero recomendado)
+  # conditions = {Role = ["!admin"]} # Ajusta según sea necesario o quita conditions
