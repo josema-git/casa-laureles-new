@@ -1,20 +1,20 @@
-# netlify.toml
+# netlify.toml (Intento con sección [functions])
 
 [build]
   command = "ng build"
   # Verifica que esta sea tu carpeta de salida del navegador
   publish = "dist/casa-laureles/browser"
+  # Quitamos 'functions' de aquí
 
-# Especifica explícitamente el directorio de funciones aquí
+# Usamos la sección dedicada [functions]
 [functions]
-  # Verifica que esta sea tu carpeta de salida del servidor (que contiene server.mjs)
+  # Verifica que esta sea tu carpeta de salida del servidor
   directory = "dist/casa-laureles/server"
-  # node_bundler = "esbuild" # Puedes probar a añadir esto si Netlify lo sugiere
+  # node_bundler = "esbuild" # Puedes probar a descomentar esto si el error persiste
 
-# Las redirecciones siguen siendo importantes
+# Las redirecciones siguen igual
 [[redirects]]
   from = "/*"
-  # Asegúrate que 'server' es el nombre correcto (de server.ts -> server.mjs)
-  to = "/.netlify/functions/server"
+  to = "/.netlify/functions/server" # Asumiendo que Netlify llama 'server' a la función
   status = 200
-  force = true # Importante para que capture todas las rutas
+  force = true
