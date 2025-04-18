@@ -1,29 +1,20 @@
 # netlify.toml
 
 [build]
-  # El comando que Netlify usa para construir tu sitio
   command = "ng build"
-
-  # La carpeta que Netlify debe desplegar como sitio estático (tu build de navegador)
-  # VERIFICA que esta ruta sea correcta según tu angular.json
+  # Verifica que esta sea tu carpeta de salida del navegador
   publish = "dist/casa-laureles/browser"
 
-  # La carpeta que contiene el ARCHIVO ÚNICO (.mjs o .js) que exporta tu handler de servidor
-  # VERIFICA que esta ruta sea correcta según tu angular.json
-  functions = "dist/casa-laureles/server"
+# Especifica explícitamente el directorio de funciones aquí
+[functions]
+  # Verifica que esta sea tu carpeta de salida del servidor (que contiene server.mjs)
+  directory = "dist/casa-laureles/server"
+  # node_bundler = "esbuild" # Puedes probar a añadir esto si Netlify lo sugiere
 
-# Regla de reescritura (redirect) para enviar todas las peticiones que no son archivos
-# a tu función serverless principal (Netlify la llamará 'server' por defecto si
-# tu archivo se llama server.ts -> server.mjs)
+# Las redirecciones siguen siendo importantes
 [[redirects]]
   from = "/*"
+  # Asegúrate que 'server' es el nombre correcto (de server.ts -> server.mjs)
   to = "/.netlify/functions/server"
   status = 200
-  force = true # Importante para que funcione con rutas de Angular
-
-# Opcional: Puedes añadir una regla 404 si quieres que Netlify maneje los 404
-# antes que Angular, aunque normalmente con SSR quieres que Angular los maneje.
-# [[redirects]]
-#   from = "/*"
-#   to = "/404.html" # O a tu página 404 estática si tienes una
-#   status = 404
+  force = true # Importante para que capture todas las rutas
