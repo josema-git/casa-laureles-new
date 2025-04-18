@@ -11,20 +11,20 @@
 /* 3. Definir la paleta de colores personalizada como variables CSS (Verde/Crema Refinada) */
 :root {
   /* Verdes Suaves (Primarios/Acentos) */
-  --color-primary-dark: #2f655b;
-  --color-primary-medium: #599e94;
-  --color-primary-light: #a3cec4;
+  --color-primary-dark: #694903;
+  --color-primary-medium: #f3b84c;
+  --color-primary-light: #f8e1af;
   /* Acento Opcional */
-  --color-accent: #facc15; /* Dorado suave */
+  --color-accent: #efd776; /* Dorado suave */
   /* Neutros Crema/Beige y Base */
-  --color-bg-light: #fdfdf5; /* Crema muy claro / Blanco roto */
+  --color-bg-light: #97978f; /* Crema muy claro / Blanco roto */
   --color-bg-base: #ffffff;  /* Blanco puro */
   /* Texto */
-  --color-text-dark: #44403c;   /* Marrón/Gris Piedra Oscuro */
+  --color-text-dark: #000000;   /* Marrón/Gris Piedra Oscuro */
   --color-text-medium: #71717a; /* Gris medio */
   --color-text-light: var(--color-bg-light);
   /* Bordes */
-  --color-border-light: #e7e5e4;
+  --color-border-light: #f7c0a4;
   /* Footer */
   --color-footer-bg: var(--color-text-dark); /* Usamos el texto oscuro para el footer */
   /* Fuentes */
