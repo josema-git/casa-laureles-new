@@ -1,0 +1,19 @@
+<header
+  class="sticky top-0 z-40 bg-[var(--color-bg-base)] shadow-sm border-b border-[var(--color-border-light)]/50 transition-transform duration-300 ease-in-out"
+  [ngClass]="{ 'header-hidden': isHidden }">
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-[var(--color-text-dark)]">
+      <a routerLink="/">CASA LAURELES</a>
+    </h1>
+    <ul class="flex space-x-5 md:space-x-8">
+      <li>
+        <a routerLink="/" routerLinkActive="text-[var(--color-primary-dark)] font-semibold" [routerLinkActiveOptions]="{exact: true}"
+           class="text-base text-[var(--color-text-medium)] hover:text-[var(--color-primary-dark)] transition-colors duration-200 ease-in-out">Inicio</a>
+      </li>
+      <li>
+        <a routerLink="/contact" routerLinkActive="text-[var(--color-primary-dark)] font-semibold"
+           class="text-base text-[var(--color-text-medium)] hover:text-[var(--color-primary-dark)] transition-colors duration-200 ease-in-out">Contacto</a>
+      </li>
+    </ul>
+  </nav>
+</header>

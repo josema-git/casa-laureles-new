@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+/* 1. Importar fuentes (¡SIEMPRE PRIMERO!) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 2. Importar Tailwind y AOS */
+@import "tailwindcss"; /* O usa @tailwind base; @tailwind components; @tailwind utilities; */
+@import 'aos/dist/aos.css';
+
+/* 3. Definir la paleta de colores personalizada como variables CSS (Verde/Crema Refinada) */
+:root {
+  /* Verdes Suaves (Primarios/Acentos) */
+  --color-primary-dark: #2f655b;
+  --color-primary-medium: #599e94;
+  --color-primary-light: #a3cec4;
+  /* Acento Opcional */
+  --color-accent: #facc15; /* Dorado suave */
+  /* Neutros Crema/Beige y Base */
+  --color-bg-light: #fdfdf5; /* Crema muy claro / Blanco roto */
+  --color-bg-base: #ffffff;  /* Blanco puro */
+  /* Texto */
+  --color-text-dark: #44403c;   /* Marrón/Gris Piedra Oscuro */
+  --color-text-medium: #71717a; /* Gris medio */
+  --color-text-light: var(--color-bg-light);
+  /* Bordes */
+  --color-border-light: #e7e5e4;
+  /* Footer */
+  --color-footer-bg: var(--color-text-dark); /* Usamos el texto oscuro para el footer */
+  /* Fuentes */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* 4. Aplicar estilos base globales */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  @apply antialiased;
+}
+
+/* 5. Estilos sutiles para el foco (Accesibilidad) */
+*:focus-visible {
+  @apply outline-none ring-2 ring-offset-2 ring-[var(--color-primary-dark)];
+}
+
+/* 6. Estilos para animación de modal (puedes moverlos a modal.css si prefieres) */
+ @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }

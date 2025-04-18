@@ -1,0 +1,42 @@
+<section id="info" class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <h3 class="text-3xl md:text-4xl font-semibold text-[var(--color-text-dark)] text-center mb-16" data-aos="fade-up">
+    Características Principales
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+    <div class="space-y-6 bg-[var(--color-bg-base)] p-8 rounded-lg shadow-lg border border-[var(--color-border-light)] transition duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+      <h4 class="text-2xl font-medium text-[var(--color-text-dark)] border-b border-[var(--color-border-light)] pb-3 mb-5">Datos Generales</h4>
+      <ul class="space-y-4 text-lg">
+        @for (item of generalDataItems; track item.label) {
+          <li class="flex justify-between">
+            <strong class="text-[var(--color-text-dark)] mr-2">{{ item.label }}:</strong>
+            <span class="text-[var(--color-text-medium)] text-right">{{ item.value }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="space-y-10">
+      <div class="bg-[var(--color-bg-base)] p-8 rounded-lg shadow-lg border border-[var(--color-border-light)] transition duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="text-2xl font-medium text-[var(--color-text-dark)] border-b border-[var(--color-border-light)] pb-3 mb-5">Distribución Interna</h4>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-lg">
+          @for (feature of internalFeatures; track feature.name) {
+            <li class="flex items-center">
+              <span class="text-[var(--color-primary-dark)] mr-2">&#10004;</span>
+              <span class="text-[var(--color-text-medium)]">{{ feature.count }} {{ feature.name }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+       <div class="bg-[var(--color-bg-base)] p-8 rounded-lg shadow-lg border border-[var(--color-border-light)] transition duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+        <h4 class="text-2xl font-medium text-[var(--color-text-dark)] border-b border-[var(--color-border-light)] pb-3 mb-5">Potencial y Normativa</h4>
+         <ul class="space-y-4 text-base">
+            @for (item of potentialItems; track item.label) {
+             <li class="leading-relaxed">
+                <strong class="text-[var(--color-text-dark)] block mb-1">{{ item.label }}:</strong>
+                <span class="text-[var(--color-text-medium)]">{{ item.value }}</span>
+             </li>
+            }
+         </ul>
+      </div>
+    </div>
+  </div>
+</section>

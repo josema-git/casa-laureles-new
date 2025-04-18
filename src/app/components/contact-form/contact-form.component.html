@@ -1,0 +1,53 @@
+<div class="bg-[var(--color-bg-base)] p-8 rounded-lg shadow-lg border border-[var(--color-border-light)] h-full">
+  <h3 class="text-2xl font-medium text-[var(--color-text-dark)] mb-4">Formulario de Contacto</h3>
+  <p class="text-[var(--color-text-medium)] mb-6">
+    Envíanos tu consulta o comentario y te responderemos pronto.
+  </p>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div>
+        <label for="name" class="block text-sm font-medium text-[var(--color-text-dark)] mb-1">Nombre Completo</label>
+        <input type="text" id="name" formControlName="name" required
+               class="block w-full px-4 py-2.5 border rounded-md shadow-sm placeholder:text-[var(--color-text-medium)]/70 focus:outline-none sm:text-sm transition"
+               [ngClass]="{'border-red-500 focus:ring-1 focus:ring-red-500 focus:border-red-500': name?.invalid && (name?.dirty || name?.touched),
+                           'border-[var(--color-border-light)] focus:ring-1 focus:ring-[var(--color-primary-dark)] focus:border-[var(--color-primary-dark)]': !(name?.invalid && (name?.dirty || name?.touched)) }">
+         @if (name?.invalid && (name?.dirty || name?.touched)){ <p class="mt-1 text-xs text-red-600">El nombre es obligatorio.</p> }
+      </div>
+      <div>
+         <label for="email" class="block text-sm font-medium text-[var(--color-text-dark)] mb-1">Correo Electrónico</label>
+         <input type="email" id="email" formControlName="email" required
+               class="block w-full px-4 py-2.5 border rounded-md shadow-sm placeholder:text-[var(--color-text-medium)]/70 focus:outline-none sm:text-sm transition"
+               [ngClass]="{'border-red-500 focus:ring-1 focus:ring-red-500 focus:border-red-500': email?.invalid && (email?.dirty || email?.touched),
+                           'border-[var(--color-border-light)] focus:ring-1 focus:ring-[var(--color-primary-dark)] focus:border-[var(--color-primary-dark)]': !(email?.invalid && (email?.dirty || email?.touched)) }">
+          @if (email?.invalid && (email?.dirty || email?.touched)){
+             @if (email?.errors?.['required']){ <p class="mt-1 text-xs text-red-600">El correo es obligatorio.</p> }
+             @if (email?.errors?.['email']){ <p class="mt-1 text-xs text-red-600">Introduce un correo válido.</p> }
+          }
+      </div>
+       <div>
+         <label for="phone" class="block text-sm font-medium text-[var(--color-text-dark)] mb-1">Teléfono <span class="text-xs text-[var(--color-text-medium)]">(Opcional)</span></label>
+         <input type="tel" id="phone" formControlName="phone"
+                class="block w-full px-4 py-2.5 border border-[var(--color-border-light)] rounded-md shadow-sm placeholder:text-[var(--color-text-medium)]/70 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-dark)] focus:border-[var(--color-primary-dark)] sm:text-sm transition">
+       </div>
+      <div>
+        <label for="message" class="block text-sm font-medium text-[var(--color-text-dark)] mb-1">Mensaje</label>
+        <textarea id="message" formControlName="message" rows="5" required
+                  class="block w-full px-4 py-2.5 border rounded-md shadow-sm placeholder:text-[var(--color-text-medium)]/70 focus:outline-none sm:text-sm transition"
+                  [ngClass]="{'border-red-500 focus:ring-1 focus:ring-red-500 focus:border-red-500': message?.invalid && (message?.dirty || message?.touched),
+                              'border-[var(--color-border-light)] focus:ring-1 focus:ring-[var(--color-primary-dark)] focus:border-[var(--color-primary-dark)]': !(message?.invalid && (message?.dirty || message?.touched)) }"></textarea>
+         @if (message?.invalid && (message?.dirty || message?.touched)){ <p class="mt-1 text-xs text-red-600">El mensaje es obligatorio.</p> }
+      </div>
+      <div>
+        <button type="submit" [disabled]="contactForm.invalid || isLoading"
+                class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-[var(--color-primary-dark)] hover:bg-[var(--color-primary-medium)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-dark)] transition duration-200 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-[1.02] disabled:transform-none">
+          @if (isLoading){
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            Enviando...
+          } @else {
+            Enviar Mensaje
+          }
+        </button>
+      </div>
+       @if (submitStatus === 'success'){ <div class="mt-4 p-3 rounded-md bg-green-50 border border-green-300 text-green-800 text-sm">¡Mensaje enviado! Gracias.</div> }
+       @if (submitStatus === 'error'){ <div class="mt-4 p-3 rounded-md bg-red-50 border border-red-300 text-red-800 text-sm">Error al enviar. Intenta de nuevo.</div> }
+  </form>
+</div>

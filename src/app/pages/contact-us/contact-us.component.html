@@ -1,0 +1,32 @@
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+
+  <div class="text-center mb-16" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-semibold text-[var(--color-text-dark)] mb-3">Contáctanos</h2>
+    <p class="text-lg text-[var(--color-text-medium)] max-w-2xl mx-auto">
+      Estamos listos para ayudarte. Completa el formulario o utiliza nuestros datos de contacto directo.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-stretch">
+
+    <div data-aos="fade-right" data-aos-delay="100">
+      <app-contact-info-card [contactInfo]="contactInfo" />
+    </div>
+
+     <div data-aos="fade-left" data-aos-delay="200">
+       <app-contact-form />
+     </div>
+
+  </div>
+
+  <div class="mt-20 md:mt-28" data-aos="fade-up" data-aos-delay="300">
+    <app-cta-section
+      title="¿Listo para Dar el Siguiente Paso?"
+      text="No pierdas la oportunidad de conocer esta propiedad única en Laureles. Contáctanos hoy mismo."
+      buttonText="Llamar Ahora"
+      [buttonLink]="contactInfo.phone"
+      linkType="tel"
+    />
+  </div>
+
+</div>

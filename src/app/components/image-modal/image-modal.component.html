@@ -1,0 +1,39 @@
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-opacity duration-300 ease-in-out animate-fade-in"
+  (click)="onBackdropClick()">
+
+  <div class="relative w-full h-full flex items-center justify-center" (click)="stopPropagation($event)">
+
+      @if(currentImageUrl){
+        <img
+          [src]="currentImageUrl"
+          [alt]="currentImageAlt"
+          class="block max-w-[90%] max-h-[85%] object-contain rounded shadow-lg bg-white" />
+          } @else {
+         <div class="text-white">Cargando imagen...</div>
+      }
+
+      <button
+        (click)="closeModal()"
+        aria-label="Cerrar modal"
+        class="absolute top-4 right-4 z-20 bg-white/70 hover:bg-white text-[var(--color-text-dark)] rounded-full p-2 shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-dark)]">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      @if (imageList.length > 1) {
+        <button
+          (click)="goToPrevious(); stopPropagation($event)"
+          aria-label="Imagen anterior"
+          class="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 z-20 bg-white/60 hover:bg-white text-[var(--color-text-dark)] rounded-full p-2 md:p-3 shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-dark)]">
+           <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+
+        <button
+          (click)="goToNext(); stopPropagation($event)"
+          aria-label="Siguiente imagen"
+          class="absolute right-2 md:right-5 top-1/2 -translate-y-1/2 z-20 bg-white/60 hover:bg-white text-[var(--color-text-dark)] rounded-full p-2 md:p-3 shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-dark)]">
+           <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      }
+      </div>
+</div>

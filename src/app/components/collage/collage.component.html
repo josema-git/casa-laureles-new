@@ -1,0 +1,61 @@
+<section class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <h3 class="text-3xl md:text-4xl font-semibold text-[var(--color-text-dark)] text-center mb-16" data-aos="fade-up">
+    Galería de Fotos
+  </h3>
+
+  <div class="mb-12 space-y-6" data-aos="fade-up" data-aos-delay="100">
+    <div class="flex flex-wrap justify-center gap-3">
+      @for (floor of availableFloors; track floor) {
+        <button
+          type="button"
+          (click)="filterByFloor(floor === 'Todos' ? null : floor)"
+          class="px-4 py-2 rounded-md border text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-primary-dark)]"
+          [ngClass]="(selectedFloor === floor || (selectedFloor === null && floor === 'Todos'))
+                     ? 'bg-[var(--color-primary-dark)] text-white border-[var(--color-primary-dark)]'
+                     : 'bg-transparent text-[var(--color-text-medium)] border-[var(--color-border-light)] hover:bg-gray-100 hover:border-gray-300'"
+        >
+          {{ floor }}
+        </button>
+      }
+    </div>
+    @if (selectedFloor && selectedFloor !== 'Todos' && availableRooms.length > 1) {
+      <div class="flex flex-wrap justify-center gap-3 border-t border-dashed border-[var(--color-border-light)] pt-6 mt-6">
+        @for (room of availableRooms; track room) {
+          <button
+            type="button"
+            (click)="filterByRoom(room === 'Todas' ? null : room)"
+            class="px-4 py-2 rounded-md border text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-primary-dark)]"
+            [ngClass]="(selectedRoom === room || (selectedRoom === null && room === 'Todas'))
+                       ? 'bg-[var(--color-primary-dark)]/80 text-white border-[var(--color-primary-dark)]/80'
+                       : 'bg-transparent text-[var(--color-text-medium)] border-[var(--color-border-light)] hover:bg-gray-100 hover:border-gray-300'"
+          >
+            {{ room }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+  <div class="columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6">
+    @for (photo of filteredPhotos; track photo.src; let i = $index) {
+      <div
+        class="overflow-hidden rounded-lg shadow-md border border-[var(--color-border-light)]/70 group bg-gray-50 cursor-pointer break-inside-avoid relative ring-2 ring-inset ring-transparent group-hover:ring-[var(--color-primary-dark)] transition duration-300 ease-in-out"
+        (click)="openImageModal(photo)">
+        <img
+          [src]="photo.src"
+          [alt]="photo.alt"
+          class="w-full h-auto object-cover block transform transition-transform duration-300 ease-in-out group-hover:scale-[1.05]"
+          loading="lazy"
+        />
+      </div>
+    }
+  </div>
+   @if (filteredPhotos.length === 0) {
+     <p class="mt-12 text-center text-[var(--color-text-medium)] italic">
+       No hay fotos que coincidan con los filtros seleccionados.
+     </p>
+   }
+</section>
+
+@if (showModal) { <app-image-modal
+    [imageList]="currentModalPhotos"   [startIndex]="currentModalStartIndex" (close)="closeImageModal()">        </app-image-modal>
+}

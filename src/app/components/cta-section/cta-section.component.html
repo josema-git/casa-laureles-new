@@ -1,0 +1,31 @@
+<div class="text-center bg-[var(--color-primary-light)] text-[var(--color-text-dark)] p-8 md:p-14 rounded-lg shadow-lg border border-transparent">
+  <h3 class="text-3xl font-semibold text-[var(--color-primary-dark)] mb-4">
+    {{ title }}
+  </h3>
+  <p class="text-lg text-[var(--color-text-dark)]/80 mb-8 max-w-3xl mx-auto">
+    {{ text }}
+  </p>
+  @if (isRouterLink()) {
+    <a
+      [routerLink]="buttonLink"
+      class="inline-block bg-[var(--color-accent)] text-[var(--color-text-dark)] font-semibold py-3 px-8 rounded-md shadow-lg hover:bg-yellow-400 hover:scale-105 transform transition duration-300 ease-in-out text-lg focus-visible:ring-offset-0 focus-visible:ring-white">
+      {{ buttonText }}
+    </a>
+  } @else if (isTelLink()) {
+     <a
+      [href]="'tel:' + buttonLink"
+      class="inline-block bg-[var(--color-accent)] text-[var(--color-text-dark)] font-semibold py-3 px-8 rounded-md shadow-lg hover:bg-yellow-400 hover:scale-105 transform transition duration-300 ease-in-out text-lg focus-visible:ring-offset-0 focus-visible:ring-white">
+      {{ buttonText }}
+     </a>
+  } @else if (isExternalLink()) {
+    <a
+      [href]="buttonLink" target="_blank" rel="noopener noreferrer"
+      class="inline-block bg-[var(--color-accent)] text-[var(--color-text-dark)] font-semibold py-3 px-8 rounded-md shadow-lg hover:bg-yellow-400 hover:scale-105 transform transition duration-300 ease-in-out text-lg focus-visible:ring-offset-0 focus-visible:ring-white">
+      {{ buttonText }}
+    </a>
+  } @else {
+     <button type="button" class="inline-block bg-[var(--color-accent)] text-[var(--color-text-dark)] font-semibold py-3 px-8 rounded-md shadow-lg hover:bg-yellow-400 hover:scale-105 transform transition duration-300 ease-in-out text-lg focus-visible:ring-offset-0 focus-visible:ring-white">
+         {{ buttonText }}
+     </button>
+  }
+</div>
