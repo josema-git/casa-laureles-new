@@ -1,25 +1,37 @@
-// src/server.ts (Netlify Compatible - Intento 2)
+// src/server.ts (Netlify Compatible - Corregido TS2554)
 
-// PASO 1: Verifica tu main.server.ts y ajusta la importación
-import bootstrap from './main.server'; // Asumiendo exportación de función bootstrap
+import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
+import { getContext } from '@netlify/angular-runtime/context.mjs';
+import bootstrap from './main.server'; // Asegúrate que este import es correcto
 
-// --- PASO 2: Intenta importar por defecto ---
-import netlifyAngularHandler from '@netlify/angular-runtime';
-// Ya no necesitamos importar NetlifyAngularHandlerOptions explícitamente
-// import { NetlifyAngularHandlerOptions } from '@netlify/angular-runtime'; // Comenta o borra esta línea
+// --- PASO 4: Crea la instancia del AppEngine SIN ARGUMENTOS ---
+const angularAppEngine = new AngularAppEngine();
+// Ya no se pasa { bootstrap: bootstrap } aquí
+// ---------------------------------------------------------
 
-import { fileURLToPath } from 'node:url';
-import { dirname, resolve } from 'node:path';
+// --- PASO 5: Define el handler principal para Netlify Functions ---
+export async function netlifyAppEngineHandler(request: Request): Promise<Response> {
+  const context = getContext();
 
-// --- EXPORTA EL HANDLER DE NETLIFY ---
+  // --- Opcional: API routes ---
+  // const pathname = new URL(request.url).pathname;
+  // if (pathname === '/api/hello') {
+  //   return Response.json({ message: 'Hello from the API' });
+  // }
+  // --------------------------
 
-// Mantenemos el objeto options como antes (sin tipo explícito)
-const options = {
-  // PASO 3: Asegúrate que esto coincida con tu importación del PASO 1
-  bootstrap: bootstrap,
+  // Llama a handle SIN pasar bootstrap explícitamente aquí tampoco
+  // El engine debería encontrarlo por convención
+  console.log(`SSR Handling request for: ${request.url}`);
+  const result = await angularAppEngine.handle(request, context);
 
-  // PASO 4: Verifica que esta ruta apunte a tu carpeta de build del navegador
-  outputPath: resolve(dirname(fileURLToPath(import.meta.url)), '../browser'),
-};
+  if (!result) {
+      console.log(`SSR No result for: ${request.url}, returning 404.`);
+      return new Response('Not found', { status: 404 });
+  }
+  console.log(`SSR Successfully handled: ${request.url}`);
+  return result;
+}
 
-// --- PASO 5: Llama al handler usando el nombre del
+// --- PASO 6: Exporta el reqHandler (sin cambios) ---
+export const reqHandler = createRequestHandler(netlifyAppEngineHandler);
